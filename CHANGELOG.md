@@ -48,3 +48,9 @@ All notable changes to this project are documented here. Format follows
   any entry via (entryType, entryId), same cross-cutting treatment as
   attachments. Wired into Wi-Fi credentials and secure notes as pilot
   consumers, including a tag-filter row on the Wi-Fi credentials list.
+- A consolidated "no decrypted value is ever written to disk or a search
+  index" test exercising all six entry types, attachments, tags, and
+  search indexing in one place, plus a `no-console` ESLint rule scoped
+  to `shared/crypto`, `shared/storage`, and every `*Repository.ts` so a
+  future change can't silently start logging a decrypted value.
+- A real project README replacing the React Native CLI boilerplate.

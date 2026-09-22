@@ -1,97 +1,73 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Vault
 
-# Getting Started
+A small, offline-only secrets vault for iOS and Android. Not a 1Password/Bitwarden
+replacement — no cloud sync, no cross-device sharing, no browser autofill. A single
+device, gated by biometrics, for a narrow set of things people actually need to keep:
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+- Wi-Fi credentials
+- Software license keys
+- Recovery codes (one or more per entry)
+- Freeform "important numbers" (PINs, passport numbers, etc.)
+- Device details (name, serial number, specs)
+- Secure notes
+- Encrypted attachments and tags, attachable to any entry above
 
-## Step 1: Start Metro
+## Security model
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Encryption at rest**: every field and attachment is encrypted with AES-256-GCM
+  before it reaches disk. The key is derived from a random seed stored in the
+  platform Keychain (iOS) / Keystore (Android), gated by biometry or device passcode —
+  there's no separate master password. See `src/shared/crypto`.
+- **Unlock gate**: `src/shared/sessionGuard` is an explicit state machine
+  (`locked → authenticating → unlocked | cooldown`), not a boolean. It owns idle
+  timeout, re-lock on backgrounding, and failed-attempt lockout with a cooldown.
+- **No cloud sync.** The only way data leaves or enters the vault is a manual,
+  passphrase-encrypted export/import file (`src/features/backup`).
+- **In-memory-only search**: the search index (`src/features/search`) is built
+  fresh on every unlock and lives only in component state — it's never written to
+  disk, and disappears the moment the app locks.
+- **Reveal-on-demand fields**: secret values are masked by default, reveal on tap,
+  and auto re-mask after a timeout (`src/shared/components/RevealableSecretField`).
+- **Clipboard auto-clear** after copying a revealed value — see that component for
+  the real platform limitations (this only works while the app stays foregrounded).
+- **Screenshot protection**: enabled via Android's `FLAG_SECURE` where the platform
+  allows it. iOS has no equivalent API; don't rely on this on iOS.
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+## Project structure
 
-```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+```
+src/
+  app/            App composition: entry point, unlock screen, vault key context
+  features/       One folder per entry type, plus attachments/search/backup/tags
+  shared/
+    crypto/        Key derivation, encrypt/decrypt — the only code that touches
+                    a raw cipher API
+    storage/       Encrypted record + attachment file persistence
+    sessionGuard/   The lock state machine
+    components/     Cross-feature UI (RevealableSecretField, ...)
+    theme/          Colors, spacing
+  navigation/      React Navigation stack + route types
 ```
 
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+## Getting started
 
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
+corepack enable
+yarn install
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+iOS also needs CocoaPods:
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+Then:
 
 ```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+yarn ios      # or: yarn android
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for commands, commit conventions, and what
+a security-sensitive change needs to include.
