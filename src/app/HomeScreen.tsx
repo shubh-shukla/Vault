@@ -31,6 +31,10 @@ const MENU_ENTRIES: MenuEntry[] = [
     label: 'Device Details',
     onPress: navigation => navigation.navigate('DeviceDetailsList'),
   },
+  {
+    label: 'Secure Notes',
+    onPress: navigation => navigation.navigate('SecureNotesList'),
+  },
 ];
 
 export function HomeScreen({ navigation }: Props) {

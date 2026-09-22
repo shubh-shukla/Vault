@@ -10,4 +10,6 @@ export type RootStackParamList = {
   ImportantNumberDetail: { id?: string };
   DeviceDetailsList: undefined;
   DeviceDetailDetail: { id?: string };
+  SecureNotesList: undefined;
+  SecureNoteDetail: { id?: string };
 };

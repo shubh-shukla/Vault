@@ -26,3 +26,4 @@ All notable changes to this project are documented here. Format follows
   reveal-on-demand value field.
 - Device details: CRUD for device name, serial number, specs, and notes
   (no reveal-on-demand field — nothing in this entry type is secret).
+- Secure notes: CRUD for freeform title/body notes.

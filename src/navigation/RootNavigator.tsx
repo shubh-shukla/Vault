@@ -23,6 +23,10 @@ import {
   DeviceDetailsListScreen,
   DeviceDetailDetailScreen,
 } from '@features/deviceDetails';
+import {
+  SecureNotesListScreen,
+  SecureNoteDetailScreen,
+} from '@features/secureNotes';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -95,6 +99,16 @@ export function RootNavigator() {
           name="DeviceDetailDetail"
           component={DeviceDetailDetailScreen}
           options={{ title: 'Device' }}
+        />
+        <Stack.Screen
+          name="SecureNotesList"
+          component={SecureNotesListScreen}
+          options={{ title: 'Secure Notes' }}
+        />
+        <Stack.Screen
+          name="SecureNoteDetail"
+          component={SecureNoteDetailScreen}
+          options={{ title: 'Secure Note' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
