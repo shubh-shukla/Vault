@@ -44,3 +44,7 @@ All notable changes to this project are documented here. Format follows
   through the normal per-feature repositories under the _current_
   device's vault key. No cloud sync — this is the only way data leaves
   or enters the vault.
+- Tags (`features/tags`): create/rename/delete a tag and assign it to
+  any entry via (entryType, entryId), same cross-cutting treatment as
+  attachments. Wired into Wi-Fi credentials and secure notes as pilot
+  consumers, including a tag-filter row on the Wi-Fi credentials list.

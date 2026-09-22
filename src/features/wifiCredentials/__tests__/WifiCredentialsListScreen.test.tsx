@@ -1,11 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
+  act,
   fireEvent,
   render,
   screen,
   waitFor,
 } from '@testing-library/react-native';
 import { VaultKeyProvider } from '@app/VaultKeyContext';
+import { assignTag, createTag } from '@features/tags';
 import { WifiCredentialsListScreen } from '../WifiCredentialsListScreen';
 import { saveWifiCredential } from '../wifiCredentialRepository';
 
@@ -63,5 +65,34 @@ describe('WifiCredentialsListScreen', () => {
     expect(navigate).toHaveBeenCalledWith('WifiCredentialDetail', {
       id: 'id-1',
     });
+  });
+
+  it('filters the list to only credentials assigned the selected tag', async () => {
+    await saveWifiCredential(vaultKey, {
+      id: 'id-1',
+      ssid: 'HomeWifi',
+      password: 'pw',
+      notes: '',
+    });
+    await saveWifiCredential(vaultKey, {
+      id: 'id-2',
+      ssid: 'OfficeWifi',
+      password: 'pw',
+      notes: '',
+    });
+    const tag = await createTag(vaultKey, 'Work');
+    await assignTag(vaultKey, tag.id, 'wifiCredentials', 'id-2');
+
+    await renderListScreen();
+    await waitFor(() => expect(screen.getByText('HomeWifi')).toBeTruthy());
+    expect(screen.getByText('OfficeWifi')).toBeTruthy();
+
+    await act(async () => fireEvent.press(screen.getByText('Work')));
+
+    await waitFor(() => expect(screen.queryByText('HomeWifi')).toBeNull());
+    expect(screen.getByText('OfficeWifi')).toBeTruthy();
+
+    await act(async () => fireEvent.press(screen.getByText('All')));
+    await waitFor(() => expect(screen.getByText('HomeWifi')).toBeTruthy());
   });
 });

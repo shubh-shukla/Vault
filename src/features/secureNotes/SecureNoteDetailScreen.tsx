@@ -10,6 +10,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
 import { colors, spacing } from '@shared/theme';
 import { AttachmentsSection } from '@features/attachments';
+import { TagsSection } from '@features/tags';
 import { useSecureNotes } from './useSecureNotes';
 
 const ENTRY_TYPE = 'secureNotes';
@@ -91,6 +92,8 @@ export function SecureNoteDetailScreen({ route, navigation }: Props) {
     <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.viewTitle}>{existing.title || 'Untitled note'}</Text>
       <Text style={styles.viewBody}>{existing.body}</Text>
+
+      <TagsSection entryType={ENTRY_TYPE} entryId={existing.id} />
 
       <AttachmentsSection entryType={ENTRY_TYPE} entryId={existing.id} />
 

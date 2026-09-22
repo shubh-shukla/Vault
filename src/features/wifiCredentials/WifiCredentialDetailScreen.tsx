@@ -10,7 +10,10 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
 import { RevealableSecretField } from '@shared/components/RevealableSecretField';
 import { colors, spacing } from '@shared/theme';
+import { TagsSection } from '@features/tags';
 import { useWifiCredentials } from './useWifiCredentials';
+
+const ENTRY_TYPE = 'wifiCredentials';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'WifiCredentialDetail'>;
 
@@ -112,6 +115,8 @@ export function WifiCredentialDetailScreen({ route, navigation }: Props) {
 
       <Text style={styles.fieldLabel}>Notes</Text>
       <Text style={styles.viewValue}>{existing.notes || '—'}</Text>
+
+      <TagsSection entryType={ENTRY_TYPE} entryId={existing.id} />
 
       <Pressable
         accessibilityRole="button"
