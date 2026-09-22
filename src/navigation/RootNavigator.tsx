@@ -7,6 +7,10 @@ import {
   WifiCredentialsListScreen,
   WifiCredentialDetailScreen,
 } from '@features/wifiCredentials';
+import {
+  LicenseKeysListScreen,
+  LicenseKeyDetailScreen,
+} from '@features/licenseKeys';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -39,6 +43,16 @@ export function RootNavigator() {
           name="WifiCredentialDetail"
           component={WifiCredentialDetailScreen}
           options={{ title: 'Wi-Fi Credential' }}
+        />
+        <Stack.Screen
+          name="LicenseKeysList"
+          component={LicenseKeysListScreen}
+          options={{ title: 'License Keys' }}
+        />
+        <Stack.Screen
+          name="LicenseKeyDetail"
+          component={LicenseKeyDetailScreen}
+          options={{ title: 'License Key' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

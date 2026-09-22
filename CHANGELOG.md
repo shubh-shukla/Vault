@@ -20,3 +20,4 @@ All notable changes to this project are documented here. Format follows
   storage layer (`shared/storage`).
 - Wi-Fi credentials: CRUD with field-level encryption, reveal-on-demand
   password field with clipboard auto-clear (`shared/components/RevealableSecretField`).
+- License keys: CRUD with field-level encryption, reveal-on-demand key field.

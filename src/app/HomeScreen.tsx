@@ -15,6 +15,10 @@ const MENU_ENTRIES: MenuEntry[] = [
     label: 'Wi-Fi Credentials',
     onPress: navigation => navigation.navigate('WifiCredentialsList'),
   },
+  {
+    label: 'License Keys',
+    onPress: navigation => navigation.navigate('LicenseKeysList'),
+  },
 ];
 
 export function HomeScreen({ navigation }: Props) {
