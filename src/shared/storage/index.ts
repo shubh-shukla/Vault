@@ -5,3 +5,8 @@ export {
   loadAllEncryptedRecords,
   deleteEncryptedRecord,
 } from './encryptedRecordStore';
+export {
+  writeEncryptedAttachmentFile,
+  readEncryptedAttachmentFile,
+  deleteEncryptedAttachmentFile,
+} from './attachmentFileStore';

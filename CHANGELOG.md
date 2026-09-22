@@ -27,3 +27,8 @@ All notable changes to this project are documented here. Format follows
 - Device details: CRUD for device name, serial number, specs, and notes
   (no reveal-on-demand field — nothing in this entry type is secret).
 - Secure notes: CRUD for freeform title/body notes.
+- Encrypted attachments (`features/attachments`): import a file via the
+  system document picker, encrypt it with a dedicated attachment subkey,
+  and store it under a random on-disk name — the original filename only
+  ever exists inside the encrypted metadata record, never as a path.
+  Wired into secure notes as the first consumer via `AttachmentsSection`.
