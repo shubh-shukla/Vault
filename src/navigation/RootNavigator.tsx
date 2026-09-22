@@ -11,6 +11,10 @@ import {
   LicenseKeysListScreen,
   LicenseKeyDetailScreen,
 } from '@features/licenseKeys';
+import {
+  RecoveryCodesListScreen,
+  RecoveryCodeDetailScreen,
+} from '@features/recoveryCodes';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -53,6 +57,16 @@ export function RootNavigator() {
           name="LicenseKeyDetail"
           component={LicenseKeyDetailScreen}
           options={{ title: 'License Key' }}
+        />
+        <Stack.Screen
+          name="RecoveryCodesList"
+          component={RecoveryCodesListScreen}
+          options={{ title: 'Recovery Codes' }}
+        />
+        <Stack.Screen
+          name="RecoveryCodeDetail"
+          component={RecoveryCodeDetailScreen}
+          options={{ title: 'Recovery Codes' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

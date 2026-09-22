@@ -19,6 +19,10 @@ const MENU_ENTRIES: MenuEntry[] = [
     label: 'License Keys',
     onPress: navigation => navigation.navigate('LicenseKeysList'),
   },
+  {
+    label: 'Recovery Codes',
+    onPress: navigation => navigation.navigate('RecoveryCodesList'),
+  },
 ];
 
 export function HomeScreen({ navigation }: Props) {

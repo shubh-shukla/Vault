@@ -21,3 +21,4 @@ All notable changes to this project are documented here. Format follows
 - Wi-Fi credentials: CRUD with field-level encryption, reveal-on-demand
   password field with clipboard auto-clear (`shared/components/RevealableSecretField`).
 - License keys: CRUD with field-level encryption, reveal-on-demand key field.
+- Recovery codes: CRUD for multi-code entries, all codes revealed together.
