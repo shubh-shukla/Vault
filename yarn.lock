@@ -1648,6 +1648,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jest/diff-sequences@npm:30.5.0":
+  version: 30.5.0
+  resolution: "@jest/diff-sequences@npm:30.5.0"
+  checksum: f6afafc9245e0326e03fa2136d9023b93ed4f3e491eb740c4ae66e267b2a47690ff61094a84ebc0a2e5fa9e0ae036ca24636176298698907d6848b89d85677e4
+  languageName: node
+  linkType: hard
+
 "@jest/environment@npm:^29.7.0":
   version: 29.7.0
   resolution: "@jest/environment@npm:29.7.0"
@@ -1693,6 +1700,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@jest/get-type@npm:30.5.0":
+  version: 30.5.0
+  resolution: "@jest/get-type@npm:30.5.0"
+  checksum: 6b67e70f6c1cca6da153814542903b4c385447c7c5e029f8911402ca8a75fbd33a14cc0fff4c6ed7c6c629f6425fade605d6f32eb9516b52146a8640fd899773
+  languageName: node
+  linkType: hard
+
 "@jest/globals@npm:^29.7.0":
   version: 29.7.0
   resolution: "@jest/globals@npm:29.7.0"
@@ -1702,6 +1716,20 @@ __metadata:
     "@jest/types": ^29.6.3
     jest-mock: ^29.7.0
   checksum: 97dbb9459135693ad3a422e65ca1c250f03d82b2a77f6207e7fa0edd2c9d2015fbe4346f3dc9ebff1678b9d8da74754d4d440b7837497f8927059c0642a22123
+  languageName: node
+  linkType: hard
+
+"@jest/react-is-18@npm:react-is@^18.3.1, react-is@npm:^18.0.0":
+  version: 18.3.1
+  resolution: "react-is@npm:18.3.1"
+  checksum: e20fe84c86ff172fc8d898251b7cc2c43645d108bf96d0b8edf39b98f9a2cae97b40520ee7ed8ee0085ccc94736c4886294456033304151c3f94978cec03df21
+  languageName: node
+  linkType: hard
+
+"@jest/react-is-19@npm:react-is@^19.2.5, react-is@npm:^19.2.3":
+  version: 19.3.0
+  resolution: "react-is@npm:19.3.0"
+  checksum: c7170b2f1f8bc91cb14c94849a5463a84360b8737d9829aa48c9ef314c1442bc87a2e93e167da45c74ebdbf5b912bdc2fab3c993df495adde3223d533edd6f3b
   languageName: node
   linkType: hard
 
@@ -1739,6 +1767,15 @@ __metadata:
     node-notifier:
       optional: true
   checksum: 7eadabd62cc344f629024b8a268ecc8367dba756152b761bdcb7b7e570a3864fc51b2a9810cd310d85e0a0173ef002ba4528d5ea0329fbf66ee2a3ada9c40455
+  languageName: node
+  linkType: hard
+
+"@jest/schemas@npm:30.5.0":
+  version: 30.5.0
+  resolution: "@jest/schemas@npm:30.5.0"
+  dependencies:
+    "@sinclair/typebox": ^0.34.0
+  checksum: 9cce773d1e749e5a0c542321e5a3cd7593d9e29fde4f661996c2fbcdb14c2160a631428e04cd6619827c809c34607d1a388a571df9ee0997026782d098e80735
   languageName: node
   linkType: hard
 
@@ -2395,6 +2432,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sinclair/typebox@npm:^0.34.0":
+  version: 0.34.52
+  resolution: "@sinclair/typebox@npm:0.34.52"
+  checksum: 4996f7e16431216d9998700d86645a3341a8036a020466414ec89dbbbbcc60e96d0ed04bd8c7ac4d145ced9aeba991bf2d7334b5b6b579b943e94d208a516c0e
+  languageName: node
+  linkType: hard
+
 "@sinonjs/commons@npm:^3.0.0":
   version: 3.0.1
   resolution: "@sinonjs/commons@npm:3.0.1"
@@ -2410,6 +2454,26 @@ __metadata:
   dependencies:
     "@sinonjs/commons": ^3.0.0
   checksum: 614d30cb4d5201550c940945d44c9e0b6d64a888ff2cd5b357f95ad6721070d6b8839cd10e15b76bf5e14af0bcc1d8f9ec00d49a46318f1f669a4bec1d7f3148
+  languageName: node
+  linkType: hard
+
+"@testing-library/react-native@npm:^14.0.1":
+  version: 14.0.1
+  resolution: "@testing-library/react-native@npm:14.0.1"
+  dependencies:
+    jest-matcher-utils: ^30.4.1
+    picocolors: ^1.1.1
+    pretty-format: ^30.4.1
+    redent: ^3.0.0
+  peerDependencies:
+    jest: ">=29.0.0"
+    react: ">=19.0.0"
+    react-native: ">=0.78"
+    test-renderer: ^1.0.0
+  peerDependenciesMeta:
+    jest:
+      optional: true
+  checksum: 4b8b2edd192e8940ea32e474638270bf375746843d035b23547e36bd2a28eb7f650852e8839d4fa28b8c0cc3ebea35d1476235ac0c167feb4b7544045ec56ae2
   languageName: node
   linkType: hard
 
@@ -2504,6 +2568,15 @@ __metadata:
   dependencies:
     undici-types: ~8.9.0
   checksum: 48b47e3fe659c63390e559ab5c6abc0484ef0d0940c9600ff0add3654617f0a75c9cc0ff91157d0e4dd360b20f8dfdf8a5abd38661b85f42d5543e70f20d7105
+  languageName: node
+  linkType: hard
+
+"@types/react-reconciler@npm:~0.33.0":
+  version: 0.33.0
+  resolution: "@types/react-reconciler@npm:0.33.0"
+  peerDependencies:
+    "@types/react": "*"
+  checksum: 9ff6ec96aeda1a5a6f577f1e890b6c1ba67d4fbd1c8097b7f1320a3419061ab2c5b42ee2937b950936728517736b484035764f655bfe0169afecbec9c4e4d747
   languageName: node
   linkType: hard
 
@@ -2713,6 +2786,7 @@ __metadata:
     "@react-native/metro-config": 0.87.1
     "@react-native/new-app-screen": 0.87.1
     "@react-native/typescript-config": 0.87.1
+    "@testing-library/react-native": ^14.0.1
     "@types/jest": ^29.5.13
     "@types/node": ^26.6.2
     "@types/react": ^19.2.0
@@ -2731,6 +2805,7 @@ __metadata:
     react-native-quick-crypto: ^1.1.7
     react-native-safe-area-context: ^5.5.2
     react-test-renderer: 19.2.3
+    test-renderer: ^1.3.0
     typescript: ^6.0.3
   languageName: unknown
   linkType: soft
@@ -2867,7 +2942,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ansi-styles@npm:^5.0.0":
+"ansi-styles@npm:^5.0.0, ansi-styles@npm:^5.2.0":
   version: 5.2.0
   resolution: "ansi-styles@npm:5.2.0"
   checksum: d7f4e97ce0623aea6bc0d90dcd28881ee04cba06c570b97fd3391bd7a268eedfd9d5e2dd4fdcbdd82b8105df5faf6f24aaedc08eaf3da898e702db5948f63469
@@ -3421,7 +3496,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.2":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -5179,6 +5254,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"indent-string@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "indent-string@npm:4.0.0"
+  checksum: 824cfb9929d031dabf059bebfe08cf3137365e112019086ed3dcff6a0a7b698cb80cf67ccccde0e25b9e2d7527aa6cc1fed1ac490c752162496caba3e6699612
+  languageName: node
+  linkType: hard
+
 "inflight@npm:^1.0.4":
   version: 1.0.6
   resolution: "inflight@npm:1.0.6"
@@ -5759,6 +5841,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jest-diff@npm:30.5.2":
+  version: 30.5.2
+  resolution: "jest-diff@npm:30.5.2"
+  dependencies:
+    "@jest/diff-sequences": 30.5.0
+    "@jest/get-type": 30.5.0
+    chalk: ^4.1.2
+    pretty-format: 30.5.1
+  checksum: 56d162bd4a37c631f81ea00f5f108a0531496a59c2022d7d97214d77094a79f81e68ea16fbbd9a6115469a57ea403ba37fa135fe3c127123775964df7b1efaf2
+  languageName: node
+  linkType: hard
+
 "jest-diff@npm:^29.7.0":
   version: 29.7.0
   resolution: "jest-diff@npm:29.7.0"
@@ -5856,6 +5950,18 @@ __metadata:
     jest-get-type: ^29.6.3
     pretty-format: ^29.7.0
   checksum: d7259e5f995d915e8a37a8fd494cb7d6af24cd2a287b200f831717ba0d015190375f9f5dc35393b8ba2aae9b2ebd60984635269c7f8cff7d85b077543b7744cd
+  languageName: node
+  linkType: hard
+
+"jest-matcher-utils@npm:^30.4.1":
+  version: 30.5.2
+  resolution: "jest-matcher-utils@npm:30.5.2"
+  dependencies:
+    "@jest/get-type": 30.5.0
+    chalk: ^4.1.2
+    jest-diff: 30.5.2
+    pretty-format: 30.5.1
+  checksum: 0f5506fc810bbc43876bc6a15ff1ca11b97e06e6cdeff0ca67edb3d569052ccf479eac95e25ee7daf6ff52f2c03a3d92d33e8f0f237444cd24d94212cd7cf2f8
   languageName: node
   linkType: hard
 
@@ -6745,6 +6851,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"min-indent@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "min-indent@npm:1.0.1"
+  checksum: bfc6dd03c5eaf623a4963ebd94d087f6f4bbbfd8c41329a7f09706b0cb66969c4ddd336abeb587bc44bc6f08e13bf90f0b374f9d71f9f01e04adc2cd6f083ef1
+  languageName: node
+  linkType: hard
+
 "minimatch@npm:^10.2.2":
   version: 10.2.6
   resolution: "minimatch@npm:10.2.6"
@@ -7328,6 +7441,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pretty-format@npm:30.5.1, pretty-format@npm:^30.4.1":
+  version: 30.5.1
+  resolution: "pretty-format@npm:30.5.1"
+  dependencies:
+    "@jest/react-is-18": "npm:react-is@^18.3.1"
+    "@jest/react-is-19": "npm:react-is@^19.2.5"
+    "@jest/schemas": 30.5.0
+    ansi-styles: ^5.2.0
+  checksum: 0aee5a8a8318c2df834ec7949da34f914803316272a758722d9b2492f527375a887112aeca6f4f17c9a2f7592ce47c851fa6b281eaac25bb5a775caf826da8c1
+  languageName: node
+  linkType: hard
+
 "pretty-format@npm:^29.0.0, pretty-format@npm:^29.7.0":
   version: 29.7.0
   resolution: "pretty-format@npm:29.7.0"
@@ -7450,20 +7575,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^18.0.0":
-  version: 18.3.1
-  resolution: "react-is@npm:18.3.1"
-  checksum: e20fe84c86ff172fc8d898251b7cc2c43645d108bf96d0b8edf39b98f9a2cae97b40520ee7ed8ee0085ccc94736c4886294456033304151c3f94978cec03df21
-  languageName: node
-  linkType: hard
-
-"react-is@npm:^19.2.3":
-  version: 19.3.0
-  resolution: "react-is@npm:19.3.0"
-  checksum: c7170b2f1f8bc91cb14c94849a5463a84360b8737d9829aa48c9ef314c1442bc87a2e93e167da45c74ebdbf5b912bdc2fab3c993df495adde3223d533edd6f3b
-  languageName: node
-  linkType: hard
-
 "react-native-keychain@npm:^10.0.0":
   version: 10.0.0
   resolution: "react-native-keychain@npm:10.0.0"
@@ -7570,6 +7681,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-reconciler@npm:~0.34.0":
+  version: 0.34.0
+  resolution: "react-reconciler@npm:0.34.0"
+  dependencies:
+    scheduler: ^0.28.0
+  peerDependencies:
+    react: ^19.3.0
+  checksum: 25cc57ba77bf8dad110b5df51edf87d8afcd601a44beec5e3acf88004c20d7b734079c7d95be155bf65c4e19b4add83fce3bd13985fe24b3e6daafafa945854b
+  languageName: node
+  linkType: hard
+
 "react-refresh@npm:^0.14.0":
   version: 0.14.2
   resolution: "react-refresh@npm:0.14.2"
@@ -7617,6 +7739,16 @@ __metadata:
     string_decoder: ^1.1.1
     util-deprecate: ^1.0.1
   checksum: bdcbe6c22e846b6af075e32cf8f4751c2576238c5043169a1c221c92ee2878458a816a4ea33f4c67623c0b6827c8a400409bfb3cf0bf3381392d0b1dfb52ac8d
+  languageName: node
+  linkType: hard
+
+"redent@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "redent@npm:3.0.0"
+  dependencies:
+    indent-string: ^4.0.0
+    strip-indent: ^3.0.0
+  checksum: fa1ef20404a2d399235e83cc80bd55a956642e37dd197b4b612ba7327bf87fa32745aeb4a1634b2bab25467164ab4ed9c15be2c307923dd08b0fe7c52431ae6b
   languageName: node
   linkType: hard
 
@@ -7905,6 +8037,13 @@ __metadata:
   version: 0.27.0
   resolution: "scheduler@npm:0.27.0"
   checksum: 92644ead0a9443e20f9d24132fe93675b156209b9eeb35ea245f8a86768d0cc0fcca56f341eeef21d9b6dd8e72d6d5e260eb5a41d34b05cd605dd45a29f572ef
+  languageName: node
+  linkType: hard
+
+"scheduler@npm:^0.28.0":
+  version: 0.28.0
+  resolution: "scheduler@npm:0.28.0"
+  checksum: 2ec673f773d3b8992ca047a7e94e21b0f6dfea8414935a0d92b070ce1ea6b1b5ee97976f3efc9f3eb49982957b1cd8e38a20b63fb14ed6a848ae063aeb87e751
   languageName: node
   linkType: hard
 
@@ -8356,6 +8495,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strip-indent@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "strip-indent@npm:3.0.0"
+  dependencies:
+    min-indent: ^1.0.0
+  checksum: 18f045d57d9d0d90cd16f72b2313d6364fd2cb4bf85b9f593523ad431c8720011a4d5f08b6591c9d580f446e78855c5334a30fb91aa1560f5d9f95ed1b4a0530
+  languageName: node
+  linkType: hard
+
 "strip-json-comments@npm:^3.1.1":
   version: 3.1.1
   resolution: "strip-json-comments@npm:3.1.1"
@@ -8432,6 +8580,18 @@ __metadata:
     glob: ^7.1.4
     minimatch: ^3.0.4
   checksum: 3b34a3d77165a2cb82b34014b3aba93b1c4637a5011807557dc2f3da826c59975a5ccad765721c4648b39817e3472789f9b0fa98fc854c5c1c7a1e632aacdc28
+  languageName: node
+  linkType: hard
+
+"test-renderer@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "test-renderer@npm:1.3.0"
+  dependencies:
+    "@types/react-reconciler": ~0.33.0
+    react-reconciler: ~0.34.0
+  peerDependencies:
+    react: ^19.0.0
+  checksum: fad57a77b26f40caacf746ee4190c4e5ce5afd30d5808e3b1e597d9ebc9a92a3ac656dfd847ab68e3a4d13d5c4290d6c16fe295753ef2adc9ca2251f9a688d50
   languageName: node
   linkType: hard
 
