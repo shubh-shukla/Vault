@@ -1,10 +1,35 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '@navigation/types';
 import { colors, spacing } from '@shared/theme';
 
-export function HomeScreen() {
+type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+interface MenuEntry {
+  label: string;
+  onPress: (navigation: Props['navigation']) => void;
+}
+
+const MENU_ENTRIES: MenuEntry[] = [
+  {
+    label: 'Wi-Fi Credentials',
+    onPress: navigation => navigation.navigate('WifiCredentialsList'),
+  },
+];
+
+export function HomeScreen({ navigation }: Props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.placeholder}>No entries yet.</Text>
+      {MENU_ENTRIES.map(entry => (
+        <Pressable
+          key={entry.label}
+          accessibilityRole="button"
+          style={styles.row}
+          onPress={() => entry.onPress(navigation)}
+        >
+          <Text style={styles.rowLabel}>{entry.label}</Text>
+        </Pressable>
+      ))}
     </View>
   );
 }
@@ -12,12 +37,15 @@ export function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: spacing.lg,
+    padding: spacing.md,
   },
-  placeholder: {
-    color: colors.textSecondary,
+  row: {
+    paddingVertical: spacing.md,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+  },
+  rowLabel: {
+    color: colors.textPrimary,
     fontSize: 16,
   },
 });

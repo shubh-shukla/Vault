@@ -3,6 +3,10 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { enableScreens } from 'react-native-screens';
 import { colors } from '@shared/theme';
 import { HomeScreen } from '@app/HomeScreen';
+import {
+  WifiCredentialsListScreen,
+  WifiCredentialDetailScreen,
+} from '@features/wifiCredentials';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -25,6 +29,16 @@ export function RootNavigator() {
           name="Home"
           component={HomeScreen}
           options={{ title: 'Vault' }}
+        />
+        <Stack.Screen
+          name="WifiCredentialsList"
+          component={WifiCredentialsListScreen}
+          options={{ title: 'Wi-Fi Credentials' }}
+        />
+        <Stack.Screen
+          name="WifiCredentialDetail"
+          component={WifiCredentialDetailScreen}
+          options={{ title: 'Wi-Fi Credential' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
