@@ -32,3 +32,7 @@ All notable changes to this project are documented here. Format follows
   and store it under a random on-disk name — the original filename only
   ever exists inside the encrypted metadata record, never as a path.
   Wired into secure notes as the first consumer via `AttachmentsSection`.
+- In-memory search (`features/search`) across all six entry types. The
+  index is built once per unlock, held only in component state, and
+  discarded automatically when the app locks (the whole navigator
+  unmounts) — it is never written to disk.

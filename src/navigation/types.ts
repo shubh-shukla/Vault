@@ -12,4 +12,5 @@ export type RootStackParamList = {
   DeviceDetailDetail: { id?: string };
   SecureNotesList: undefined;
   SecureNoteDetail: { id?: string };
+  Search: undefined;
 };

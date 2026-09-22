@@ -27,6 +27,7 @@ import {
   SecureNotesListScreen,
   SecureNoteDetailScreen,
 } from '@features/secureNotes';
+import { SearchScreen } from '@features/search';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -109,6 +110,11 @@ export function RootNavigator() {
           name="SecureNoteDetail"
           component={SecureNoteDetailScreen}
           options={{ title: 'Secure Note' }}
+        />
+        <Stack.Screen
+          name="Search"
+          component={SearchScreen}
+          options={{ title: 'Search' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

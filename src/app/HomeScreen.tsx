@@ -1,3 +1,4 @@
+import { useLayoutEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
@@ -37,7 +38,26 @@ const MENU_ENTRIES: MenuEntry[] = [
   },
 ];
 
+function SearchButton({ onPress }: { onPress: () => void }) {
+  return (
+    <Pressable accessibilityRole="button" onPress={onPress}>
+      <Text style={styles.searchButtonText}>Search</Text>
+    </Pressable>
+  );
+}
+
 export function HomeScreen({ navigation }: Props) {
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      // react-navigation's headerRight option is always a render function,
+      // not a JSX element, so this can't be hoisted the way a JSX prop could be.
+      // eslint-disable-next-line react/no-unstable-nested-components
+      headerRight: () => (
+        <SearchButton onPress={() => navigation.navigate('Search')} />
+      ),
+    });
+  }, [navigation]);
+
   return (
     <View style={styles.container}>
       {MENU_ENTRIES.map(entry => (
@@ -67,5 +87,10 @@ const styles = StyleSheet.create({
   rowLabel: {
     color: colors.textPrimary,
     fontSize: 16,
+  },
+  searchButtonText: {
+    color: colors.accent,
+    fontSize: 16,
+    fontWeight: '600',
   },
 });
