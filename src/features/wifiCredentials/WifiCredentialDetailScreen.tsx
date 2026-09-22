@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { FieldRow } from '@shared/components/FieldRow';
 import { RevealableSecretField } from '@shared/components/RevealableSecretField';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { TagsSection } from '@features/tags';
@@ -50,12 +52,21 @@ export function WifiCredentialDetailScreen({ route, navigation }: Props) {
     navigation.goBack();
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!existing) {
       return;
     }
-    await remove(existing.id);
-    navigation.goBack();
+    Alert.alert('Delete this Wi-Fi credential?', 'This cannot be undone.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await remove(existing.id);
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   if (isEditing) {
@@ -108,13 +119,11 @@ export function WifiCredentialDetailScreen({ route, navigation }: Props) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.fieldLabel}>Network name (SSID)</Text>
-      <Text style={styles.viewValue}>{existing.ssid}</Text>
+      <FieldRow label="Network name (SSID)" value={existing.ssid} />
 
       <RevealableSecretField label="Password" value={existing.password} />
 
-      <Text style={styles.fieldLabel}>Notes</Text>
-      <Text style={styles.viewValue}>{existing.notes || '—'}</Text>
+      <FieldRow label="Notes" value={existing.notes} />
 
       <TagsSection entryType={ENTRY_TYPE} entryId={existing.id} />
 
@@ -144,11 +153,6 @@ const styles = StyleSheet.create({
     ...typography.label,
     color: colors.textSecondary,
     marginBottom: spacing.xs,
-  },
-  viewValue: {
-    ...typography.body,
-    color: colors.textPrimary,
-    marginBottom: spacing.md,
   },
   input: {
     ...typography.body,

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { FieldRow } from '@shared/components/FieldRow';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { useDeviceDetails } from './useDeviceDetails';
 
@@ -43,12 +45,21 @@ export function DeviceDetailDetailScreen({ route, navigation }: Props) {
     navigation.goBack();
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!existing) {
       return;
     }
-    await remove(existing.id);
-    navigation.goBack();
+    Alert.alert('Delete this device?', 'This cannot be undone.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await remove(existing.id);
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   if (isEditing) {
@@ -110,17 +121,10 @@ export function DeviceDetailDetailScreen({ route, navigation }: Props) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.fieldLabel}>Device name</Text>
-      <Text style={styles.viewValue}>{existing.deviceName}</Text>
-
-      <Text style={styles.fieldLabel}>Serial number</Text>
-      <Text style={styles.viewValue}>{existing.serialNumber || '—'}</Text>
-
-      <Text style={styles.fieldLabel}>Specs</Text>
-      <Text style={styles.viewValue}>{existing.specs || '—'}</Text>
-
-      <Text style={styles.fieldLabel}>Notes</Text>
-      <Text style={styles.viewValue}>{existing.notes || '—'}</Text>
+      <FieldRow label="Device name" value={existing.deviceName} />
+      <FieldRow label="Serial number" value={existing.serialNumber} />
+      <FieldRow label="Specs" value={existing.specs} />
+      <FieldRow label="Notes" value={existing.notes} />
 
       <Pressable
         accessibilityRole="button"
@@ -148,11 +152,6 @@ const styles = StyleSheet.create({
     ...typography.label,
     color: colors.textSecondary,
     marginBottom: spacing.xs,
-  },
-  viewValue: {
-    ...typography.body,
-    color: colors.textPrimary,
-    marginBottom: spacing.md,
   },
   input: {
     ...typography.body,

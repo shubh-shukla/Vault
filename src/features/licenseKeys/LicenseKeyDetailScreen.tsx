@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { FieldRow } from '@shared/components/FieldRow';
 import { RevealableSecretField } from '@shared/components/RevealableSecretField';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { useLicenseKeys } from './useLicenseKeys';
@@ -44,12 +46,21 @@ export function LicenseKeyDetailScreen({ route, navigation }: Props) {
     navigation.goBack();
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!existing) {
       return;
     }
-    await remove(existing.id);
-    navigation.goBack();
+    Alert.alert('Delete this license key?', 'This cannot be undone.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await remove(existing.id);
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   if (isEditing) {
@@ -101,13 +112,11 @@ export function LicenseKeyDetailScreen({ route, navigation }: Props) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.fieldLabel}>Product name</Text>
-      <Text style={styles.viewValue}>{existing.productName}</Text>
+      <FieldRow label="Product name" value={existing.productName} />
 
       <RevealableSecretField label="License key" value={existing.key} />
 
-      <Text style={styles.fieldLabel}>Purchase notes</Text>
-      <Text style={styles.viewValue}>{existing.purchaseNotes || '—'}</Text>
+      <FieldRow label="Purchase notes" value={existing.purchaseNotes} />
 
       <Pressable
         accessibilityRole="button"
@@ -135,11 +144,6 @@ const styles = StyleSheet.create({
     ...typography.label,
     color: colors.textSecondary,
     marginBottom: spacing.xs,
-  },
-  viewValue: {
-    ...typography.body,
-    color: colors.textPrimary,
-    marginBottom: spacing.md,
   },
   input: {
     ...typography.body,

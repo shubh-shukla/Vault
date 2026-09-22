@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 import {
   act,
   fireEvent,
@@ -15,6 +16,7 @@ import {
 
 const mockAsyncStorage = AsyncStorage as unknown as { __reset: () => void };
 const vaultKey = Buffer.alloc(32, 5);
+let confirmDelete: (() => void) | undefined;
 
 function renderDetailScreen(params: { id?: string }, goBack = jest.fn()) {
   const navigation = { navigate: jest.fn(), goBack } as never;
@@ -30,6 +32,15 @@ function renderDetailScreen(params: { id?: string }, goBack = jest.fn()) {
 
 beforeEach(() => {
   mockAsyncStorage.__reset();
+  confirmDelete = undefined;
+  jest.spyOn(Alert, 'alert').mockImplementation((_title, _message, buttons) => {
+    confirmDelete = buttons?.find(button => button.style === 'destructive')
+      ?.onPress as (() => void) | undefined;
+  });
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
 });
 
 describe('RecoveryCodeDetailScreen — create', () => {
@@ -119,8 +130,27 @@ describe('RecoveryCodeDetailScreen — view/edit an existing entry', () => {
     await waitFor(() => expect(screen.getByText('GitHub')).toBeTruthy());
 
     await act(async () => fireEvent.press(screen.getByText('Delete')));
+    await act(async () => confirmDelete?.());
 
     expect(goBack).toHaveBeenCalledTimes(1);
     expect(await listRecoveryCodeEntries(vaultKey)).toEqual([]);
+  });
+
+  it('does not delete the entry until the confirmation is accepted', async () => {
+    await saveRecoveryCodeEntry(vaultKey, {
+      id: 'id-1',
+      serviceName: 'GitHub',
+      codes: ['aaaa-1111'],
+      notes: '',
+    });
+
+    const goBack = jest.fn();
+    await renderDetailScreen({ id: 'id-1' }, goBack);
+    await waitFor(() => expect(screen.getByText('GitHub')).toBeTruthy());
+
+    await act(async () => fireEvent.press(screen.getByText('Delete')));
+
+    expect(goBack).not.toHaveBeenCalled();
+    expect(await listRecoveryCodeEntries(vaultKey)).toHaveLength(1);
   });
 });

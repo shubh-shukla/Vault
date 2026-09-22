@@ -1,7 +1,15 @@
 import { useLayoutEffect, useMemo, useState } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { CategoryBadge } from '@shared/components/CategoryBadge';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { useEntryIdsForTag, useTags } from '@features/tags';
 import { useWifiCredentials } from './useWifiCredentials';
@@ -47,7 +55,11 @@ export function WifiCredentialsListScreen({ navigation }: Props) {
   );
 
   if (isLoading) {
-    return null;
+    return (
+      <View style={styles.emptyContainer}>
+        <ActivityIndicator color={colors.accent} />
+      </View>
+    );
   }
 
   return (
@@ -96,6 +108,7 @@ export function WifiCredentialsListScreen({ navigation }: Props) {
 
       {visibleCredentials.length === 0 ? (
         <View style={styles.emptyContainer}>
+          {credentials.length === 0 && <CategoryBadge glyph="W" size={44} />}
           <Text style={styles.emptyText}>
             {credentials.length === 0
               ? 'No Wi-Fi credentials yet.'
@@ -116,6 +129,7 @@ export function WifiCredentialsListScreen({ navigation }: Props) {
               }
             >
               <Text style={styles.ssid}>{item.ssid}</Text>
+              <Text style={styles.chevron}>›</Text>
             </Pressable>
           )}
         />
@@ -156,6 +170,9 @@ const styles = StyleSheet.create({
     padding: spacing.md,
   },
   row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
@@ -164,11 +181,16 @@ const styles = StyleSheet.create({
     ...typography.body,
     color: colors.textPrimary,
   },
+  chevron: {
+    ...typography.body,
+    color: colors.textSecondary,
+  },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: spacing.lg,
+    gap: spacing.md,
   },
   emptyText: {
     ...typography.body,

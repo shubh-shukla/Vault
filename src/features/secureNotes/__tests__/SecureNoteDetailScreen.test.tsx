@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 import {
   act,
   fireEvent,
@@ -12,6 +13,7 @@ import { listSecureNotes, saveSecureNote } from '../secureNoteRepository';
 
 const mockAsyncStorage = AsyncStorage as unknown as { __reset: () => void };
 const vaultKey = Buffer.alloc(32, 5);
+let confirmDelete: (() => void) | undefined;
 
 function renderDetailScreen(params: { id?: string }, goBack = jest.fn()) {
   const navigation = { navigate: jest.fn(), goBack } as never;
@@ -27,6 +29,15 @@ function renderDetailScreen(params: { id?: string }, goBack = jest.fn()) {
 
 beforeEach(() => {
   mockAsyncStorage.__reset();
+  confirmDelete = undefined;
+  jest.spyOn(Alert, 'alert').mockImplementation((_title, _message, buttons) => {
+    confirmDelete = buttons?.find(button => button.style === 'destructive')
+      ?.onPress as (() => void) | undefined;
+  });
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
 });
 
 describe('SecureNoteDetailScreen — create', () => {
@@ -105,8 +116,26 @@ describe('SecureNoteDetailScreen — view/edit an existing entry', () => {
     await waitFor(() => expect(screen.getByText('My Note')).toBeTruthy());
 
     await act(async () => fireEvent.press(screen.getByText('Delete')));
+    await act(async () => confirmDelete?.());
 
     expect(goBack).toHaveBeenCalledTimes(1);
     expect(await listSecureNotes(vaultKey)).toEqual([]);
+  });
+
+  it('does not delete the entry until the confirmation is accepted', async () => {
+    await saveSecureNote(vaultKey, {
+      id: 'id-1',
+      title: 'My Note',
+      body: 'note contents',
+    });
+
+    const goBack = jest.fn();
+    await renderDetailScreen({ id: 'id-1' }, goBack);
+    await waitFor(() => expect(screen.getByText('My Note')).toBeTruthy());
+
+    await act(async () => fireEvent.press(screen.getByText('Delete')));
+
+    expect(goBack).not.toHaveBeenCalled();
+    expect(await listSecureNotes(vaultKey)).toHaveLength(1);
   });
 });

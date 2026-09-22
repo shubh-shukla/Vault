@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { CategoryBadge } from '@shared/components/CategoryBadge';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { useVaultSearch } from './useVaultSearch';
 import type { SearchableEntry, SearchableEntryType } from './types';
@@ -24,6 +25,15 @@ const DETAIL_ROUTE_BY_ENTRY_TYPE: Record<
   importantNumbers: 'ImportantNumberDetail',
   deviceDetails: 'DeviceDetailDetail',
   secureNotes: 'SecureNoteDetail',
+};
+
+const GLYPH_BY_ENTRY_TYPE: Record<SearchableEntryType, string> = {
+  wifiCredentials: 'W',
+  licenseKeys: 'K',
+  recoveryCodes: 'R',
+  importantNumbers: '#',
+  deviceDetails: 'D',
+  secureNotes: 'N',
 };
 
 export function SearchScreen({ navigation }: Props) {
@@ -69,8 +79,14 @@ export function SearchScreen({ navigation }: Props) {
             style={styles.row}
             onPress={() => handlePressResult(item)}
           >
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.subtitle}>{item.subtitle}</Text>
+            <CategoryBadge
+              glyph={GLYPH_BY_ENTRY_TYPE[item.entryType]}
+              size={28}
+            />
+            <View style={styles.rowText}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.subtitle}>{item.subtitle}</Text>
+            </View>
           </Pressable>
         )}
       />
@@ -99,9 +115,15 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
   },
   row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.md,
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+  },
+  rowText: {
+    flex: 1,
   },
   title: {
     ...typography.body,

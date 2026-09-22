@@ -1,7 +1,15 @@
 import { useLayoutEffect } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { CategoryBadge } from '@shared/components/CategoryBadge';
 import { colors, spacing, typography } from '@shared/theme';
 import { useRecoveryCodes } from './useRecoveryCodes';
 import type { RecoveryCodeEntry } from './types';
@@ -33,12 +41,17 @@ export function RecoveryCodesListScreen({ navigation }: Props) {
   }, [navigation]);
 
   if (isLoading) {
-    return null;
+    return (
+      <View style={styles.emptyContainer}>
+        <ActivityIndicator color={colors.accent} />
+      </View>
+    );
   }
 
   if (entries.length === 0) {
     return (
       <View style={styles.emptyContainer}>
+        <CategoryBadge glyph="R" size={44} />
         <Text style={styles.emptyText}>No recovery codes yet.</Text>
       </View>
     );
@@ -57,10 +70,13 @@ export function RecoveryCodesListScreen({ navigation }: Props) {
             navigation.navigate('RecoveryCodeDetail', { id: item.id })
           }
         >
-          <Text style={styles.serviceName}>{item.serviceName}</Text>
-          <Text style={styles.codeCount}>
-            {item.codes.length} code{item.codes.length === 1 ? '' : 's'}
-          </Text>
+          <View style={styles.rowText}>
+            <Text style={styles.serviceName}>{item.serviceName}</Text>
+            <Text style={styles.codeCount}>
+              {item.codes.length} code{item.codes.length === 1 ? '' : 's'}
+            </Text>
+          </View>
+          <Text style={styles.chevron}>›</Text>
         </Pressable>
       )}
     />
@@ -72,9 +88,15 @@ const styles = StyleSheet.create({
     padding: spacing.md,
   },
   row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
+  },
+  rowText: {
+    flex: 1,
   },
   serviceName: {
     ...typography.body,
@@ -85,11 +107,16 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     marginTop: spacing.xs,
   },
+  chevron: {
+    ...typography.body,
+    color: colors.textSecondary,
+  },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: spacing.lg,
+    gap: spacing.md,
   },
   emptyText: {
     ...typography.body,

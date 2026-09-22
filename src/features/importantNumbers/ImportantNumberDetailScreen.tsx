@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -8,6 +9,7 @@ import {
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { FieldRow } from '@shared/components/FieldRow';
 import { RevealableSecretField } from '@shared/components/RevealableSecretField';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { useImportantNumbers } from './useImportantNumbers';
@@ -43,12 +45,21 @@ export function ImportantNumberDetailScreen({ route, navigation }: Props) {
     navigation.goBack();
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!existing) {
       return;
     }
-    await remove(existing.id);
-    navigation.goBack();
+    Alert.alert('Delete this important number?', 'This cannot be undone.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await remove(existing.id);
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   if (isEditing) {
@@ -90,8 +101,7 @@ export function ImportantNumberDetailScreen({ route, navigation }: Props) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.fieldLabel}>Label</Text>
-      <Text style={styles.viewValue}>{existing.label}</Text>
+      <FieldRow label="Label" value={existing.label} />
 
       <RevealableSecretField label="Value" value={existing.value} />
 
@@ -121,11 +131,6 @@ const styles = StyleSheet.create({
     ...typography.label,
     color: colors.textSecondary,
     marginBottom: spacing.xs,
-  },
-  viewValue: {
-    ...typography.body,
-    color: colors.textPrimary,
-    marginBottom: spacing.md,
   },
   input: {
     ...typography.body,

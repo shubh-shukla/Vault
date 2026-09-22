@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 import {
   act,
   fireEvent,
@@ -12,6 +13,7 @@ import { listLicenseKeys, saveLicenseKey } from '../licenseKeyRepository';
 
 const mockAsyncStorage = AsyncStorage as unknown as { __reset: () => void };
 const vaultKey = Buffer.alloc(32, 5);
+let confirmDelete: (() => void) | undefined;
 
 function renderDetailScreen(params: { id?: string }, goBack = jest.fn()) {
   const navigation = { navigate: jest.fn(), goBack } as never;
@@ -27,6 +29,15 @@ function renderDetailScreen(params: { id?: string }, goBack = jest.fn()) {
 
 beforeEach(() => {
   mockAsyncStorage.__reset();
+  confirmDelete = undefined;
+  jest.spyOn(Alert, 'alert').mockImplementation((_title, _message, buttons) => {
+    confirmDelete = buttons?.find(button => button.style === 'destructive')
+      ?.onPress as (() => void) | undefined;
+  });
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
 });
 
 describe('LicenseKeyDetailScreen — create', () => {
@@ -123,8 +134,29 @@ describe('LicenseKeyDetailScreen — view/edit an existing license key', () => {
     );
 
     await act(async () => fireEvent.press(screen.getByText('Delete')));
+    await act(async () => confirmDelete?.());
 
     expect(goBack).toHaveBeenCalledTimes(1);
     expect(await listLicenseKeys(vaultKey)).toEqual([]);
+  });
+
+  it('does not delete the license key until the confirmation is accepted', async () => {
+    await saveLicenseKey(vaultKey, {
+      id: 'id-1',
+      productName: 'Photo Editor Pro',
+      key: 'key',
+      purchaseNotes: '',
+    });
+
+    const goBack = jest.fn();
+    await renderDetailScreen({ id: 'id-1' }, goBack);
+    await waitFor(() =>
+      expect(screen.getByText('Photo Editor Pro')).toBeTruthy(),
+    );
+
+    await act(async () => fireEvent.press(screen.getByText('Delete')));
+
+    expect(goBack).not.toHaveBeenCalled();
+    expect(await listLicenseKeys(vaultKey)).toHaveLength(1);
   });
 });

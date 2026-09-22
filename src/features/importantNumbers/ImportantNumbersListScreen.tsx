@@ -1,7 +1,15 @@
 import { useLayoutEffect } from 'react';
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
+import { CategoryBadge } from '@shared/components/CategoryBadge';
 import { colors, spacing, typography } from '@shared/theme';
 import { useImportantNumbers } from './useImportantNumbers';
 import type { ImportantNumberEntry } from './types';
@@ -33,12 +41,17 @@ export function ImportantNumbersListScreen({ navigation }: Props) {
   }, [navigation]);
 
   if (isLoading) {
-    return null;
+    return (
+      <View style={styles.emptyContainer}>
+        <ActivityIndicator color={colors.accent} />
+      </View>
+    );
   }
 
   if (entries.length === 0) {
     return (
       <View style={styles.emptyContainer}>
+        <CategoryBadge glyph="#" size={44} />
         <Text style={styles.emptyText}>No important numbers yet.</Text>
       </View>
     );
@@ -58,6 +71,7 @@ export function ImportantNumbersListScreen({ navigation }: Props) {
           }
         >
           <Text style={styles.label}>{item.label}</Text>
+          <Text style={styles.chevron}>›</Text>
         </Pressable>
       )}
     />
@@ -69,6 +83,9 @@ const styles = StyleSheet.create({
     padding: spacing.md,
   },
   row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingVertical: spacing.md,
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
@@ -77,11 +94,16 @@ const styles = StyleSheet.create({
     ...typography.body,
     color: colors.textPrimary,
   },
+  chevron: {
+    ...typography.body,
+    color: colors.textSecondary,
+  },
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: spacing.lg,
+    gap: spacing.md,
   },
   emptyText: {
     ...typography.body,

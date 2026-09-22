@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -43,12 +44,21 @@ export function SecureNoteDetailScreen({ route, navigation }: Props) {
     navigation.goBack();
   };
 
-  const handleDelete = async () => {
+  const handleDelete = () => {
     if (!existing) {
       return;
     }
-    await remove(existing.id);
-    navigation.goBack();
+    Alert.alert('Delete this note?', 'This cannot be undone.', [
+      { text: 'Cancel', style: 'cancel' },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          await remove(existing.id);
+          navigation.goBack();
+        },
+      },
+    ]);
   };
 
   if (isEditing) {
