@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import { useTags } from './useTags';
 import { useEntryTags } from './useEntryTags';
 import type { Tag } from './types';
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
     marginTop: spacing.lg,
   },
   label: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginBottom: spacing.sm,
   },
   chipRow: {
@@ -106,25 +106,25 @@ const styles = StyleSheet.create({
   },
   assignedChip: {
     backgroundColor: colors.accent,
-    borderRadius: spacing.md,
+    borderRadius: radius.md,
     paddingVertical: spacing.xs,
     paddingHorizontal: spacing.sm,
   },
   assignedChipText: {
-    color: colors.textPrimary,
-    fontSize: 13,
+    ...typography.label,
+    color: colors.accentText,
     fontWeight: '600',
   },
   availableChip: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: spacing.md,
+    borderRadius: radius.md,
     paddingVertical: spacing.xs,
     paddingHorizontal: spacing.sm,
   },
   availableChipText: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
   },
   addRow: {
     flexDirection: 'row',
@@ -133,11 +133,12 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 14,
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: spacing.xs,
+    borderRadius: radius.md,
     padding: spacing.sm,
   },
   addButton: {
@@ -145,8 +146,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   addButtonText: {
+    ...typography.label,
     color: colors.accent,
-    fontSize: 14,
     fontWeight: '600',
   },
 });

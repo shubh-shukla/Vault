@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
-import { colors, spacing } from '@shared/theme';
+import { colors, spacing, typography } from '@shared/theme';
 import { useRecoveryCodes } from './useRecoveryCodes';
 import type { RecoveryCodeEntry } from './types';
 
@@ -77,12 +77,12 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   serviceName: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
   },
   codeCount: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginTop: spacing.xs,
   },
   emptyContainer: {
@@ -92,12 +92,11 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   emptyText: {
+    ...typography.body,
     color: colors.textSecondary,
-    fontSize: 16,
   },
   addButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.accent,
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

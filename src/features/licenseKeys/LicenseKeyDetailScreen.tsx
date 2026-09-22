@@ -9,7 +9,7 @@ import {
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
 import { RevealableSecretField } from '@shared/components/RevealableSecretField';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import { useLicenseKeys } from './useLicenseKeys';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'LicenseKeyDetail'>;
@@ -132,21 +132,22 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   fieldLabel: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginBottom: spacing.xs,
   },
   viewValue: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
     marginBottom: spacing.md,
   },
   input: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: spacing.xs,
+    borderRadius: radius.md,
     padding: spacing.sm,
     marginBottom: spacing.md,
   },
@@ -157,14 +158,13 @@ const styles = StyleSheet.create({
   primaryButton: {
     backgroundColor: colors.accent,
     paddingVertical: spacing.md,
-    borderRadius: spacing.sm,
+    borderRadius: radius.md,
     alignItems: 'center',
     marginTop: spacing.sm,
   },
   primaryButtonText: {
-    color: colors.textPrimary,
-    fontSize: 16,
-    fontWeight: '600',
+    ...typography.bodyEmphasis,
+    color: colors.accentText,
   },
   deleteButton: {
     paddingVertical: spacing.md,
@@ -172,8 +172,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.sm,
   },
   deleteButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.danger,
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

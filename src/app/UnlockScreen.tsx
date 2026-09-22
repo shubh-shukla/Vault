@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import type { SessionGuardStatus } from '@shared/sessionGuard';
 
 export interface UnlockScreenProps {
@@ -45,6 +45,9 @@ export function UnlockScreen({
 
   return (
     <View style={styles.container}>
+      <View style={styles.dial}>
+        <View style={styles.dialTick} />
+      </View>
       <Text style={styles.title}>Vault</Text>
 
       {status === 'authenticating' && (
@@ -91,10 +94,25 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
     padding: spacing.lg,
   },
+  dial: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    borderWidth: 2,
+    borderColor: colors.accent,
+    alignItems: 'center',
+    marginBottom: spacing.lg,
+  },
+  dialTick: {
+    width: 3,
+    height: 18,
+    marginTop: 8,
+    borderRadius: 2,
+    backgroundColor: colors.accent,
+  },
   title: {
+    ...typography.display,
     color: colors.textPrimary,
-    fontSize: 28,
-    fontWeight: '700',
     marginBottom: spacing.xl,
   },
   statusBlock: {
@@ -103,23 +121,22 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
   },
   statusText: {
+    ...typography.body,
     color: colors.textSecondary,
-    fontSize: 16,
   },
   dangerText: {
+    ...typography.label,
     color: colors.danger,
-    fontSize: 14,
     marginBottom: spacing.sm,
   },
   unlockButton: {
     backgroundColor: colors.accent,
     paddingVertical: spacing.md,
     paddingHorizontal: spacing.xl,
-    borderRadius: spacing.sm,
+    borderRadius: radius.md,
   },
   unlockButtonText: {
-    color: colors.textPrimary,
-    fontSize: 16,
-    fontWeight: '600',
+    ...typography.bodyEmphasis,
+    color: colors.accentText,
   },
 });

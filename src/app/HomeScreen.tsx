@@ -2,7 +2,7 @@ import { useLayoutEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
-import { colors, spacing } from '@shared/theme';
+import { colors, spacing, typography } from '@shared/theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
@@ -89,12 +89,11 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   rowLabel: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
   },
   searchButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.accent,
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

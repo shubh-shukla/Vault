@@ -14,7 +14,7 @@ import {
 } from '@react-native-documents/picker';
 import RNFS from 'react-native-fs';
 import { useVaultKey } from '@app/VaultKeyContext';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import {
   BackupDecryptionError,
   exportVaultBackup,
@@ -157,50 +157,49 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   fieldLabel: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginBottom: spacing.xs,
   },
   input: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: spacing.xs,
+    borderRadius: radius.md,
     padding: spacing.sm,
     marginBottom: spacing.md,
   },
   primaryButton: {
     backgroundColor: colors.accent,
     paddingVertical: spacing.md,
-    borderRadius: spacing.sm,
+    borderRadius: radius.md,
     alignItems: 'center',
     marginTop: spacing.sm,
   },
   primaryButtonText: {
-    color: colors.textPrimary,
-    fontSize: 16,
-    fontWeight: '600',
+    ...typography.bodyEmphasis,
+    color: colors.accentText,
   },
   secondaryButton: {
     paddingVertical: spacing.md,
-    borderRadius: spacing.sm,
+    borderRadius: radius.md,
     borderWidth: 1,
     borderColor: colors.border,
     alignItems: 'center',
     marginTop: spacing.sm,
   },
   secondaryButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.textPrimary,
-    fontSize: 16,
-    fontWeight: '600',
   },
   spinner: {
     marginTop: spacing.lg,
   },
   statusText: {
+    ...typography.body,
     color: colors.textSecondary,
-    fontSize: 14,
     marginTop: spacing.lg,
   },
 });

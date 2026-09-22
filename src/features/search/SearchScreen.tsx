@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import { useVaultSearch } from './useVaultSearch';
 import type { SearchableEntry, SearchableEntryType } from './types';
 
@@ -84,17 +84,18 @@ const styles = StyleSheet.create({
     padding: spacing.md,
   },
   input: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
+    backgroundColor: colors.surface,
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: spacing.xs,
+    borderRadius: radius.md,
     padding: spacing.sm,
     marginBottom: spacing.md,
   },
   statusText: {
+    ...typography.body,
     color: colors.textSecondary,
-    fontSize: 14,
     marginBottom: spacing.sm,
   },
   row: {
@@ -103,12 +104,12 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   title: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
   },
   subtitle: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginTop: spacing.xs,
   },
 });

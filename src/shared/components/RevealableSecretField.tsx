@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 
 const DEFAULT_REVEAL_DURATION_MS = 15_000;
 const DEFAULT_CLIPBOARD_CLEAR_DELAY_MS = 30_000;
@@ -63,26 +63,28 @@ export function RevealableSecretField({
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
-      <View style={styles.row}>
+      <View style={styles.panel}>
         <Text style={styles.value} selectable={isRevealed}>
           {isRevealed ? value : MASK}
         </Text>
-        <Pressable
-          accessibilityRole="button"
-          onPress={isRevealed ? hide : reveal}
-          style={styles.actionButton}
-        >
-          <Text style={styles.actionText}>
-            {isRevealed ? 'Hide' : 'Reveal'}
-          </Text>
-        </Pressable>
-        <Pressable
-          accessibilityRole="button"
-          onPress={copy}
-          style={styles.actionButton}
-        >
-          <Text style={styles.actionText}>Copy</Text>
-        </Pressable>
+        <View style={styles.actions}>
+          <Pressable
+            accessibilityRole="button"
+            onPress={isRevealed ? hide : reveal}
+            style={styles.actionButton}
+          >
+            <Text style={styles.actionText}>
+              {isRevealed ? 'Hide' : 'Reveal'}
+            </Text>
+          </Pressable>
+          <Pressable
+            accessibilityRole="button"
+            onPress={copy}
+            style={styles.actionButton}
+          >
+            <Text style={styles.actionText}>Copy</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -93,28 +95,37 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   label: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginBottom: spacing.xs,
   },
-  row: {
+  panel: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.md,
   },
   value: {
+    ...typography.secretValue,
     flex: 1,
     color: colors.textPrimary,
-    fontSize: 16,
-    fontFamily: 'Menlo',
+  },
+  actions: {
+    flexDirection: 'row',
+    gap: spacing.sm,
   },
   actionButton: {
     paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.sm,
+    paddingHorizontal: spacing.xs,
   },
   actionText: {
+    ...typography.label,
     color: colors.accent,
-    fontSize: 13,
     fontWeight: '600',
   },
 });

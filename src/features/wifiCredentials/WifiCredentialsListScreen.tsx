@@ -2,7 +2,7 @@ import { useLayoutEffect, useMemo, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
-import { colors, spacing } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import { useEntryIdsForTag, useTags } from '@features/tags';
 import { useWifiCredentials } from './useWifiCredentials';
 import type { WifiCredential } from './types';
@@ -62,7 +62,14 @@ export function WifiCredentialsListScreen({ navigation }: Props) {
             ]}
             onPress={() => setSelectedTagId(null)}
           >
-            <Text style={styles.filterChipText}>All</Text>
+            <Text
+              style={[
+                styles.filterChipText,
+                selectedTagId === null && styles.filterChipTextActive,
+              ]}
+            >
+              All
+            </Text>
           </Pressable>
           {tags.map(tag => (
             <Pressable
@@ -74,7 +81,14 @@ export function WifiCredentialsListScreen({ navigation }: Props) {
               ]}
               onPress={() => setSelectedTagId(tag.id)}
             >
-              <Text style={styles.filterChipText}>{tag.name}</Text>
+              <Text
+                style={[
+                  styles.filterChipText,
+                  selectedTagId === tag.id && styles.filterChipTextActive,
+                ]}
+              >
+                {tag.name}
+              </Text>
             </Pressable>
           ))}
         </View>
@@ -123,7 +137,7 @@ const styles = StyleSheet.create({
   filterChip: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: spacing.md,
+    borderRadius: radius.md,
     paddingVertical: spacing.xs,
     paddingHorizontal: spacing.sm,
   },
@@ -132,8 +146,11 @@ const styles = StyleSheet.create({
     borderColor: colors.accent,
   },
   filterChipText: {
+    ...typography.label,
     color: colors.textPrimary,
-    fontSize: 13,
+  },
+  filterChipTextActive: {
+    color: colors.accentText,
   },
   listContent: {
     padding: spacing.md,
@@ -144,8 +161,8 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
   },
   ssid: {
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 16,
   },
   emptyContainer: {
     flex: 1,
@@ -154,12 +171,11 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   emptyText: {
+    ...typography.body,
     color: colors.textSecondary,
-    fontSize: 16,
   },
   addButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.accent,
-    fontSize: 16,
-    fontWeight: '600',
   },
 });

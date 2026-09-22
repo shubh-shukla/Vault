@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { keepLocalCopy, pick } from '@react-native-documents/picker';
 import RNFS from 'react-native-fs';
-import { colors, spacing } from '@shared/theme';
+import { colors, spacing, typography } from '@shared/theme';
 import { useAttachments } from './useAttachments';
 import type { AttachmentMetadata } from './types';
 
@@ -88,8 +88,8 @@ const styles = StyleSheet.create({
     marginTop: spacing.lg,
   },
   label: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
     marginBottom: spacing.sm,
   },
   row: {
@@ -100,19 +100,19 @@ const styles = StyleSheet.create({
   },
   fileName: {
     flex: 1,
+    ...typography.body,
     color: colors.textPrimary,
-    fontSize: 15,
   },
   fileSize: {
+    ...typography.label,
     color: colors.textSecondary,
-    fontSize: 13,
   },
   removeButton: {
     paddingHorizontal: spacing.sm,
   },
   removeButtonText: {
+    ...typography.label,
     color: colors.danger,
-    fontSize: 13,
     fontWeight: '600',
   },
   addButton: {
@@ -120,8 +120,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   addButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.accent,
-    fontSize: 15,
-    fontWeight: '600',
   },
 });
