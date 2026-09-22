@@ -28,6 +28,7 @@ import {
   SecureNoteDetailScreen,
 } from '@features/secureNotes';
 import { SearchScreen } from '@features/search';
+import { BackupScreen } from '@features/backup';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -115,6 +116,11 @@ export function RootNavigator() {
           name="Search"
           component={SearchScreen}
           options={{ title: 'Search' }}
+        />
+        <Stack.Screen
+          name="Backup"
+          component={BackupScreen}
+          options={{ title: 'Backup' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

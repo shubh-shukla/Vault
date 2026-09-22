@@ -36,6 +36,10 @@ const MENU_ENTRIES: MenuEntry[] = [
     label: 'Secure Notes',
     onPress: navigation => navigation.navigate('SecureNotesList'),
   },
+  {
+    label: 'Backup',
+    onPress: navigation => navigation.navigate('Backup'),
+  },
 ];
 
 function SearchButton({ onPress }: { onPress: () => void }) {

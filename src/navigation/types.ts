@@ -13,4 +13,5 @@ export type RootStackParamList = {
   SecureNotesList: undefined;
   SecureNoteDetail: { id?: string };
   Search: undefined;
+  Backup: undefined;
 };

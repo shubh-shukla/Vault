@@ -14,4 +14,5 @@ export { encryptRecord } from './encryptRecord';
 export { decryptRecord } from './decryptRecord';
 export { encryptAttachment } from './encryptAttachment';
 export { decryptAttachment } from './decryptAttachment';
+export { generateExportSalt, deriveExportKey } from './deriveExportKey';
 export type { EncryptedEnvelope, KeyPurpose, VaultKeyMaterial } from './types';

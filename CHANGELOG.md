@@ -36,3 +36,11 @@ All notable changes to this project are documented here. Format follows
   index is built once per unlock, held only in component state, and
   discarded automatically when the app locks (the whole navigator
   unmounts) — it is never written to disk.
+- Encrypted backup export/import (`features/backup`). Export re-encrypts
+  every entry and attachment under a key derived from a user-chosen
+  passphrase via scrypt (independent of the device Keychain, so the file
+  is restorable on another device), and saves it through the system
+  "save as" dialog. Import reverses that, then writes each entry back
+  through the normal per-feature repositories under the _current_
+  device's vault key. No cloud sync — this is the only way data leaves
+  or enters the vault.
