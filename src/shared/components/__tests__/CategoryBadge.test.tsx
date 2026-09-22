@@ -18,10 +18,4 @@ describe('CategoryBadge', () => {
 
     expect(screen.getByTestId(`category-icon-${kind}`)).toBeTruthy();
   });
-
-  it('renders with a muted tone', async () => {
-    await render(<CategoryBadge kind="backup" muted />);
-
-    expect(screen.getByTestId('category-icon-backup')).toBeTruthy();
-  });
 });

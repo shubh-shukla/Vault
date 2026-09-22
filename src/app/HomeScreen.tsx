@@ -3,8 +3,9 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
 import { CategoryBadge } from '@shared/components/CategoryBadge';
+import { CategoryIcon } from '@shared/components/CategoryIcon';
 import type { CategoryIconKind } from '@shared/components/CategoryIcon';
-import { colors, spacing, typography } from '@shared/theme';
+import { colors, radius, spacing, typography } from '@shared/theme';
 import { useWifiCredentials } from '@features/wifiCredentials';
 import { useLicenseKeys } from '@features/licenseKeys';
 import { useRecoveryCodes } from '@features/recoveryCodes';
@@ -89,30 +90,29 @@ export function HomeScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
-      {menuEntries.map(entry => (
-        <Pressable
-          key={entry.label}
-          accessibilityRole="button"
-          style={styles.row}
-          onPress={() => entry.onPress(navigation)}
-        >
-          <CategoryBadge kind={entry.kind} />
-          <Text style={styles.rowLabel}>{entry.label}</Text>
-          <Text style={styles.rowCount}>{entry.count}</Text>
-          <Text style={styles.chevron}>›</Text>
-        </Pressable>
-      ))}
-
-      <View style={styles.divider} />
+      <View>
+        {menuEntries.map(entry => (
+          <Pressable
+            key={entry.label}
+            accessibilityRole="button"
+            style={styles.row}
+            onPress={() => entry.onPress(navigation)}
+          >
+            <CategoryBadge kind={entry.kind} />
+            <Text style={styles.rowLabel}>{entry.label}</Text>
+            <Text style={styles.rowCount}>{entry.count}</Text>
+            <Text style={styles.chevron}>›</Text>
+          </Pressable>
+        ))}
+      </View>
 
       <Pressable
         accessibilityRole="button"
-        style={styles.utilityRow}
+        style={styles.backupButton}
         onPress={() => navigation.navigate('Backup')}
       >
-        <CategoryBadge kind="backup" muted />
-        <Text style={styles.utilityLabel}>Backup</Text>
-        <Text style={styles.chevron}>›</Text>
+        <CategoryIcon kind="backup" size={18} color={colors.textSecondary} />
+        <Text style={styles.backupButtonText}>Backup</Text>
       </Pressable>
     </View>
   );
@@ -121,6 +121,7 @@ export function HomeScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'space-between',
     padding: spacing.md,
   },
   row: {
@@ -144,19 +145,19 @@ const styles = StyleSheet.create({
     ...typography.body,
     color: colors.textSecondary,
   },
-  divider: {
-    height: spacing.lg,
-  },
-  utilityRow: {
+  backupButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.md,
+    justifyContent: 'center',
+    gap: spacing.sm,
     paddingVertical: spacing.md,
+    borderWidth: 1,
+    borderColor: colors.border,
+    borderRadius: radius.md,
   },
-  utilityLabel: {
-    ...typography.body,
+  backupButtonText: {
+    ...typography.bodyEmphasis,
     color: colors.textSecondary,
-    flex: 1,
   },
   searchButtonText: {
     ...typography.bodyEmphasis,
