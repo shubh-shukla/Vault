@@ -1,12 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { colors, typography } from '@shared/theme';
+import { StyleSheet, View } from 'react-native';
+import { colors } from '@shared/theme';
+import { CategoryIcon, type CategoryIconKind } from './CategoryIcon';
 
 export interface CategoryBadgeProps {
-  glyph: string;
+  kind: CategoryIconKind;
   size?: number;
 }
 
-export function CategoryBadge({ glyph, size = 36 }: CategoryBadgeProps) {
+export function CategoryBadge({ kind, size = 36 }: CategoryBadgeProps) {
   return (
     <View
       style={[
@@ -14,7 +15,7 @@ export function CategoryBadge({ glyph, size = 36 }: CategoryBadgeProps) {
         { width: size, height: size, borderRadius: size / 2 },
       ]}
     >
-      <Text style={styles.glyph}>{glyph}</Text>
+      <CategoryIcon kind={kind} size={size * 0.5} color={colors.accent} />
     </View>
   );
 }
@@ -25,10 +26,5 @@ const styles = StyleSheet.create({
     borderColor: colors.accent,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  glyph: {
-    ...typography.label,
-    color: colors.accent,
-    fontWeight: '700',
   },
 });

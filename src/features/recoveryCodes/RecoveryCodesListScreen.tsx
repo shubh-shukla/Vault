@@ -51,7 +51,7 @@ export function RecoveryCodesListScreen({ navigation }: Props) {
   if (entries.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <CategoryBadge glyph="R" size={44} />
+        <CategoryBadge kind="code" size={44} />
         <Text style={styles.emptyText}>No recovery codes yet.</Text>
       </View>
     );

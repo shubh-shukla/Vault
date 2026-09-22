@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
 import { CategoryBadge } from '@shared/components/CategoryBadge';
+import type { CategoryIconKind } from '@shared/components/CategoryIcon';
 import { colors, spacing, typography } from '@shared/theme';
 import { useWifiCredentials } from '@features/wifiCredentials';
 import { useLicenseKeys } from '@features/licenseKeys';
@@ -15,7 +16,7 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 interface MenuEntry {
   label: string;
-  glyph: string;
+  kind: CategoryIconKind;
   count: number;
   onPress: (navigation: Props['navigation']) => void;
 }
@@ -50,37 +51,37 @@ export function HomeScreen({ navigation }: Props) {
   const menuEntries: MenuEntry[] = [
     {
       label: 'Wi-Fi Credentials',
-      glyph: 'W',
+      kind: 'wifi',
       count: credentials.length,
       onPress: nav => nav.navigate('WifiCredentialsList'),
     },
     {
       label: 'License Keys',
-      glyph: 'K',
+      kind: 'key',
       count: licenseKeys.length,
       onPress: nav => nav.navigate('LicenseKeysList'),
     },
     {
       label: 'Recovery Codes',
-      glyph: 'R',
+      kind: 'code',
       count: recoveryCodes.length,
       onPress: nav => nav.navigate('RecoveryCodesList'),
     },
     {
       label: 'Important Numbers',
-      glyph: '#',
+      kind: 'phone',
       count: importantNumbers.length,
       onPress: nav => nav.navigate('ImportantNumbersList'),
     },
     {
       label: 'Device Details',
-      glyph: 'D',
+      kind: 'device',
       count: deviceDetails.length,
       onPress: nav => nav.navigate('DeviceDetailsList'),
     },
     {
       label: 'Secure Notes',
-      glyph: 'N',
+      kind: 'note',
       count: secureNotes.length,
       onPress: nav => nav.navigate('SecureNotesList'),
     },
@@ -95,7 +96,7 @@ export function HomeScreen({ navigation }: Props) {
           style={styles.row}
           onPress={() => entry.onPress(navigation)}
         >
-          <CategoryBadge glyph={entry.glyph} />
+          <CategoryBadge kind={entry.kind} />
           <Text style={styles.rowLabel}>{entry.label}</Text>
           <Text style={styles.rowCount}>{entry.count}</Text>
           <Text style={styles.chevron}>›</Text>

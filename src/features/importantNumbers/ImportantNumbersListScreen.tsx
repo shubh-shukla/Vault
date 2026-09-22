@@ -51,7 +51,7 @@ export function ImportantNumbersListScreen({ navigation }: Props) {
   if (entries.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <CategoryBadge glyph="#" size={44} />
+        <CategoryBadge kind="phone" size={44} />
         <Text style={styles.emptyText}>No important numbers yet.</Text>
       </View>
     );

@@ -108,7 +108,7 @@ export function WifiCredentialsListScreen({ navigation }: Props) {
 
       {visibleCredentials.length === 0 ? (
         <View style={styles.emptyContainer}>
-          {credentials.length === 0 && <CategoryBadge glyph="W" size={44} />}
+          {credentials.length === 0 && <CategoryBadge kind="wifi" size={44} />}
           <Text style={styles.emptyText}>
             {credentials.length === 0
               ? 'No Wi-Fi credentials yet.'

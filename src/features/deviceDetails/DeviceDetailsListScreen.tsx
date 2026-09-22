@@ -51,7 +51,7 @@ export function DeviceDetailsListScreen({ navigation }: Props) {
   if (entries.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <CategoryBadge glyph="D" size={44} />
+        <CategoryBadge kind="device" size={44} />
         <Text style={styles.emptyText}>No devices yet.</Text>
       </View>
     );

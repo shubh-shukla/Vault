@@ -51,7 +51,7 @@ export function LicenseKeysListScreen({ navigation }: Props) {
   if (licenseKeys.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <CategoryBadge glyph="K" size={44} />
+        <CategoryBadge kind="key" size={44} />
         <Text style={styles.emptyText}>No license keys yet.</Text>
       </View>
     );

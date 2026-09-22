@@ -9,6 +9,7 @@ import {
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '@navigation/types';
 import { CategoryBadge } from '@shared/components/CategoryBadge';
+import type { CategoryIconKind } from '@shared/components/CategoryIcon';
 import { colors, radius, spacing, typography } from '@shared/theme';
 import { useVaultSearch } from './useVaultSearch';
 import type { SearchableEntry, SearchableEntryType } from './types';
@@ -27,13 +28,13 @@ const DETAIL_ROUTE_BY_ENTRY_TYPE: Record<
   secureNotes: 'SecureNoteDetail',
 };
 
-const GLYPH_BY_ENTRY_TYPE: Record<SearchableEntryType, string> = {
-  wifiCredentials: 'W',
-  licenseKeys: 'K',
-  recoveryCodes: 'R',
-  importantNumbers: '#',
-  deviceDetails: 'D',
-  secureNotes: 'N',
+const ICON_BY_ENTRY_TYPE: Record<SearchableEntryType, CategoryIconKind> = {
+  wifiCredentials: 'wifi',
+  licenseKeys: 'key',
+  recoveryCodes: 'code',
+  importantNumbers: 'phone',
+  deviceDetails: 'device',
+  secureNotes: 'note',
 };
 
 export function SearchScreen({ navigation }: Props) {
@@ -80,7 +81,7 @@ export function SearchScreen({ navigation }: Props) {
             onPress={() => handlePressResult(item)}
           >
             <CategoryBadge
-              glyph={GLYPH_BY_ENTRY_TYPE[item.entryType]}
+              kind={ICON_BY_ENTRY_TYPE[item.entryType]}
               size={28}
             />
             <View style={styles.rowText}>

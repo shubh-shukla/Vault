@@ -51,7 +51,7 @@ export function SecureNotesListScreen({ navigation }: Props) {
   if (entries.length === 0) {
     return (
       <View style={styles.emptyContainer}>
-        <CategoryBadge glyph="N" size={44} />
+        <CategoryBadge kind="note" size={44} />
         <Text style={styles.emptyText}>No secure notes yet.</Text>
       </View>
     );

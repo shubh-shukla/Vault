@@ -1,10 +1,20 @@
 import { render, screen } from '@testing-library/react-native';
 import { CategoryBadge } from '../CategoryBadge';
+import type { CategoryIconKind } from '../CategoryIcon';
+
+const KINDS: CategoryIconKind[] = [
+  'wifi',
+  'key',
+  'code',
+  'phone',
+  'device',
+  'note',
+];
 
 describe('CategoryBadge', () => {
-  it('renders the glyph', async () => {
-    await render(<CategoryBadge glyph="W" />);
+  it.each(KINDS)('renders the icon for kind "%s"', async kind => {
+    await render(<CategoryBadge kind={kind} />);
 
-    expect(screen.getByText('W')).toBeTruthy();
+    expect(screen.getByTestId(`category-icon-${kind}`)).toBeTruthy();
   });
 });
