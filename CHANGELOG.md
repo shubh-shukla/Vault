@@ -54,3 +54,6 @@ All notable changes to this project are documented here. Format follows
   to `shared/crypto`, `shared/storage`, and every `*Repository.ts` so a
   future change can't silently start logging a decrypted value.
 - A real project README replacing the React Native CLI boilerplate.
+- Android screenshot/screen-recording protection via `FLAG_SECURE` on
+  the main window (`MainActivity.onCreate`). iOS has no equivalent API
+  and none is claimed.
