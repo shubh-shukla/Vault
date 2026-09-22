@@ -110,6 +110,7 @@ export function HomeScreen({ navigation }: Props) {
         style={styles.utilityRow}
         onPress={() => navigation.navigate('Backup')}
       >
+        <CategoryBadge kind="backup" muted />
         <Text style={styles.utilityLabel}>Backup</Text>
         <Text style={styles.chevron}>›</Text>
       </Pressable>
@@ -149,12 +150,13 @@ const styles = StyleSheet.create({
   utilityRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: spacing.md,
     paddingVertical: spacing.md,
   },
   utilityLabel: {
     ...typography.body,
     color: colors.textSecondary,
+    flex: 1,
   },
   searchButtonText: {
     ...typography.bodyEmphasis,

@@ -6,7 +6,8 @@ export type CategoryIconKind =
   | 'code'
   | 'phone'
   | 'device'
-  | 'note';
+  | 'note'
+  | 'backup';
 
 export interface CategoryIconProps {
   kind: CategoryIconKind;
@@ -194,6 +195,39 @@ function NoteGlyph({ size, color }: IconGlyphProps) {
   );
 }
 
+function BackupGlyph({ size, color }: IconGlyphProps) {
+  const stroke = Math.max(1.5, size * 0.14);
+  const triangleSize = size * 0.22;
+  return (
+    <View style={styles.alignCenter}>
+      <View
+        style={{ width: stroke, height: size * 0.35, backgroundColor: color }}
+      />
+      <View
+        style={[
+          styles.triangle,
+          {
+            borderLeftWidth: triangleSize,
+            borderRightWidth: triangleSize,
+            borderTopWidth: triangleSize,
+            borderTopColor: color,
+            marginTop: -stroke * 0.5,
+          },
+        ]}
+      />
+      <View
+        style={{
+          width: size * 0.75,
+          height: stroke,
+          borderRadius: stroke / 2,
+          backgroundColor: color,
+          marginTop: size * 0.18,
+        }}
+      />
+    </View>
+  );
+}
+
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
@@ -210,6 +244,12 @@ const styles = StyleSheet.create({
   justifyEnd: {
     justifyContent: 'flex-end',
   },
+  triangle: {
+    width: 0,
+    height: 0,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+  },
 });
 
 const ICON_BY_KIND: Record<
@@ -222,4 +262,5 @@ const ICON_BY_KIND: Record<
   phone: PhoneGlyph,
   device: DeviceGlyph,
   note: NoteGlyph,
+  backup: BackupGlyph,
 };

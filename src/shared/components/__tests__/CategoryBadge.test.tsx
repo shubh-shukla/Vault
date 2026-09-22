@@ -9,6 +9,7 @@ const KINDS: CategoryIconKind[] = [
   'phone',
   'device',
   'note',
+  'backup',
 ];
 
 describe('CategoryBadge', () => {
@@ -16,5 +17,11 @@ describe('CategoryBadge', () => {
     await render(<CategoryBadge kind={kind} />);
 
     expect(screen.getByTestId(`category-icon-${kind}`)).toBeTruthy();
+  });
+
+  it('renders with a muted tone', async () => {
+    await render(<CategoryBadge kind="backup" muted />);
+
+    expect(screen.getByTestId('category-icon-backup')).toBeTruthy();
   });
 });
