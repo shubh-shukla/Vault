@@ -80,57 +80,50 @@ function KeyGlyph({ size, color }: IconGlyphProps) {
 }
 
 function CodeGlyph({ size, color }: IconGlyphProps) {
-  const dotSize = size * 0.16;
-  const gap = size * 0.14;
+  const stroke = Math.max(2, size * 0.16);
+  const shackleSize = size * 0.5;
+  const bodyWidth = size * 0.7;
+  const bodyHeight = size * 0.4;
   return (
-    <View style={{ gap }}>
-      {[0, 1].map(row => (
-        <View key={row} style={[styles.row, { gap }]}>
-          {[0, 1, 2].map(column => (
-            <View
-              key={column}
-              style={{
-                width: dotSize,
-                height: dotSize,
-                borderRadius: dotSize / 2,
-                backgroundColor: color,
-              }}
-            />
-          ))}
-        </View>
-      ))}
+    <View style={styles.alignCenter}>
+      <View
+        style={[
+          styles.noBottomBorder,
+          {
+            width: shackleSize,
+            height: shackleSize * 0.7,
+            borderTopLeftRadius: shackleSize / 2,
+            borderTopRightRadius: shackleSize / 2,
+            borderWidth: stroke,
+            borderColor: color,
+          },
+        ]}
+      />
+      <View
+        style={{
+          width: bodyWidth,
+          height: bodyHeight,
+          borderRadius: stroke * 0.7,
+          backgroundColor: color,
+          marginTop: -stroke,
+        }}
+      />
     </View>
   );
 }
 
 function PhoneGlyph({ size, color }: IconGlyphProps) {
-  const stroke = Math.max(1.5, size * 0.12);
-  const width = size * 0.5;
-  const height = size * 0.85;
+  const width = size * 0.55;
+  const height = size * 0.9;
   return (
     <View
-      style={[
-        styles.alignCenter,
-        styles.justifyEnd,
-        {
-          width,
-          height,
-          borderRadius: width * 0.3,
-          borderWidth: stroke,
-          borderColor: color,
-          paddingBottom: height * 0.12,
-        },
-      ]}
-    >
-      <View
-        style={{
-          width: width * 0.35,
-          height: stroke * 0.8,
-          borderRadius: stroke,
-          backgroundColor: color,
-        }}
-      />
-    </View>
+      style={{
+        width,
+        height,
+        borderRadius: size * 0.14,
+        backgroundColor: color,
+      }}
+    />
   );
 }
 
@@ -241,8 +234,8 @@ const styles = StyleSheet.create({
   justifyCenter: {
     justifyContent: 'center',
   },
-  justifyEnd: {
-    justifyContent: 'flex-end',
+  noBottomBorder: {
+    borderBottomWidth: 0,
   },
   triangle: {
     width: 0,
