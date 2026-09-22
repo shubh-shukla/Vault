@@ -6,4 +6,6 @@ export type RootStackParamList = {
   LicenseKeyDetail: { id?: string };
   RecoveryCodesList: undefined;
   RecoveryCodeDetail: { id?: string };
+  ImportantNumbersList: undefined;
+  ImportantNumberDetail: { id?: string };
 };

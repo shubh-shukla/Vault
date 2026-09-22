@@ -15,6 +15,10 @@ import {
   RecoveryCodesListScreen,
   RecoveryCodeDetailScreen,
 } from '@features/recoveryCodes';
+import {
+  ImportantNumbersListScreen,
+  ImportantNumberDetailScreen,
+} from '@features/importantNumbers';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -67,6 +71,16 @@ export function RootNavigator() {
           name="RecoveryCodeDetail"
           component={RecoveryCodeDetailScreen}
           options={{ title: 'Recovery Codes' }}
+        />
+        <Stack.Screen
+          name="ImportantNumbersList"
+          component={ImportantNumbersListScreen}
+          options={{ title: 'Important Numbers' }}
+        />
+        <Stack.Screen
+          name="ImportantNumberDetail"
+          component={ImportantNumberDetailScreen}
+          options={{ title: 'Important Number' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

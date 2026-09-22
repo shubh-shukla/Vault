@@ -22,3 +22,5 @@ All notable changes to this project are documented here. Format follows
   password field with clipboard auto-clear (`shared/components/RevealableSecretField`).
 - License keys: CRUD with field-level encryption, reveal-on-demand key field.
 - Recovery codes: CRUD for multi-code entries, all codes revealed together.
+- Important numbers: CRUD for freeform label/value entries with a
+  reveal-on-demand value field.

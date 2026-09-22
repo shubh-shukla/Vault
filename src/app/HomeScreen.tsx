@@ -23,6 +23,10 @@ const MENU_ENTRIES: MenuEntry[] = [
     label: 'Recovery Codes',
     onPress: navigation => navigation.navigate('RecoveryCodesList'),
   },
+  {
+    label: 'Important Numbers',
+    onPress: navigation => navigation.navigate('ImportantNumbersList'),
+  },
 ];
 
 export function HomeScreen({ navigation }: Props) {
