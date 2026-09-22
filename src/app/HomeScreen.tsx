@@ -150,8 +150,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingVertical: spacing.md,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
   },
   utilityLabel: {
     ...typography.body,
