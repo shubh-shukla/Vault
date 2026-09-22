@@ -27,6 +27,10 @@ const MENU_ENTRIES: MenuEntry[] = [
     label: 'Important Numbers',
     onPress: navigation => navigation.navigate('ImportantNumbersList'),
   },
+  {
+    label: 'Device Details',
+    onPress: navigation => navigation.navigate('DeviceDetailsList'),
+  },
 ];
 
 export function HomeScreen({ navigation }: Props) {

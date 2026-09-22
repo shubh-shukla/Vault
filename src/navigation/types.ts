@@ -8,4 +8,6 @@ export type RootStackParamList = {
   RecoveryCodeDetail: { id?: string };
   ImportantNumbersList: undefined;
   ImportantNumberDetail: { id?: string };
+  DeviceDetailsList: undefined;
+  DeviceDetailDetail: { id?: string };
 };

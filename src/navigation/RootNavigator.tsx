@@ -19,6 +19,10 @@ import {
   ImportantNumbersListScreen,
   ImportantNumberDetailScreen,
 } from '@features/importantNumbers';
+import {
+  DeviceDetailsListScreen,
+  DeviceDetailDetailScreen,
+} from '@features/deviceDetails';
 import type { RootStackParamList } from './types';
 
 if (process.env.JEST_WORKER_ID === undefined) {
@@ -81,6 +85,16 @@ export function RootNavigator() {
           name="ImportantNumberDetail"
           component={ImportantNumberDetailScreen}
           options={{ title: 'Important Number' }}
+        />
+        <Stack.Screen
+          name="DeviceDetailsList"
+          component={DeviceDetailsListScreen}
+          options={{ title: 'Device Details' }}
+        />
+        <Stack.Screen
+          name="DeviceDetailDetail"
+          component={DeviceDetailDetailScreen}
+          options={{ title: 'Device' }}
         />
       </Stack.Navigator>
     </NavigationContainer>

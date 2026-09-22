@@ -24,3 +24,5 @@ All notable changes to this project are documented here. Format follows
 - Recovery codes: CRUD for multi-code entries, all codes revealed together.
 - Important numbers: CRUD for freeform label/value entries with a
   reveal-on-demand value field.
+- Device details: CRUD for device name, serial number, specs, and notes
+  (no reveal-on-demand field — nothing in this entry type is secret).
